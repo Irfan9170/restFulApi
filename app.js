@@ -32,7 +32,7 @@ app.post('/api/v1/users',(req,res)=>{
 // res.send("hello data  is updated")
 })
 
-app.patch('/api/v1/users/:id',(req,res)=>{
+app.get('/api/v1/users/:id',(req,res)=>{
     const id=req.params.id;
     // console.log(id);
     if(id>data.length-1){
@@ -45,6 +45,38 @@ app.patch('/api/v1/users/:id',(req,res)=>{
     res.status(200).json({
         status:"succes",
         data : user
+    })
+
+})
+
+app.patch('/api/v1/users/:id',(req,res)=>{
+    const id=req.params.id;
+    // console.log(id);
+    if(id>data.length){
+        return  res.status(404).json({
+            status:"invalid id",
+            // data : user
+        })
+    }
+    const user=data.find(ele=>ele.id==id);
+    res.status(200).json({
+        status:"Updated the data"
+    })
+
+})
+app.delete('/api/v1/users/:id',(req,res)=>{
+    const id=req.params.id;
+    // console.log(id);
+    if(id>data.length){
+        return  res.status(404).json({
+            status:"invalid id",
+            // data : user
+        })
+    }
+    const user=data.find(ele=>ele.id==id);
+    res.status(200).json({
+        status:"Updated the data",
+        data:null
     })
 
 })
